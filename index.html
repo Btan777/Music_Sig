@@ -391,7 +391,7 @@
         <nav>
             <div class="nav-container">
                 <div class="nav-item">
-                    <button class="nav-button active" onclick="showSection('home')">Home</button>
+                    <button class="nav-button active" onclick="showSection('home', this)">Home</button>
                 </div>
                 <div class="nav-item">
                     <button class="nav-button" onclick="toggleDropdown('genres-dropdown')">Genres ▼</button>
@@ -418,10 +418,10 @@
                     </div>
                 </div>
                 <div class="nav-item">
-                    <button class="nav-button" onclick="showSection('about')">About</button>
+                    <button class="nav-button" onclick="showSection('about', this)">About</button>
                 </div>
                 <div class="nav-item">
-                    <button class="nav-button" onclick="showSection('contact')">Contact</button>
+                    <button class="nav-button" onclick="showSection('contact', this)">Contact</button>
                 </div>
             </div>
         </nav>
@@ -654,7 +654,7 @@
     </div>
 
     <script>
-        function showSection(sectionId) {
+        function showSection(sectionId, buttonElement) {
             // Hide all sections
             const sections = document.querySelectorAll('.content-section');
             sections.forEach(section => section.classList.remove('active'));
@@ -666,10 +666,9 @@
             const buttons = document.querySelectorAll('.nav-button');
             buttons.forEach(button => button.classList.remove('active'));
             
-            // Find the clicked button and make it active
-            const clickedButton = document.querySelector(`[onclick*="showSection('${sectionId}')"]`);
-            if (clickedButton) {
-                clickedButton.classList.add('active');
+            // Make the clicked button active
+            if (buttonElement) {
+                buttonElement.classList.add('active');
             }
             
             // Close all dropdowns
