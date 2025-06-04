@@ -481,7 +481,7 @@
                     <h2>Centenarian - Musical Composition</h2>
                     
                     <!-- Documentary Artwork Image -->
-                    <img src="images/longevity-documentary.jpg" 
+                    <img src="images/longevity-documentary.png" 
                          alt="Intergenerational Memory artwork featuring elderly faces surrounding a central figure with DNA strands, lions, trains, and urban skyline elements representing Singapore's transformation through generations" 
                          class="documentary-image">
                     <p class="image-caption">
@@ -665,7 +665,12 @@
             // Update nav button states
             const buttons = document.querySelectorAll('.nav-button');
             buttons.forEach(button => button.classList.remove('active'));
-            event.target.classList.add('active');
+            
+            // Find the clicked button and make it active
+            const clickedButton = document.querySelector(`[onclick*="showSection('${sectionId}')"]`);
+            if (clickedButton) {
+                clickedButton.classList.add('active');
+            }
             
             // Close all dropdowns
             closeAllDropdowns();
@@ -738,20 +743,4 @@
                 genreContent.innerHTML = `
                     <div class="genre-card">
                         <h3>${info.title}</h3>
-                        <p>${info.content}</p>
-                    </div>
-                `;
-            }
-            
-            closeAllDropdowns();
-        }
-
-        // Close dropdowns when clicking outside
-        document.addEventListener('click', function(event) {
-            if (!event.target.matches('.nav-button')) {
-                closeAllDropdowns();
-            }
-        });
-    </script>
-</body>
-</html>
+                        <p>${info.content
