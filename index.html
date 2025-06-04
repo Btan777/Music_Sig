@@ -743,4 +743,20 @@
                 genreContent.innerHTML = `
                     <div class="genre-card">
                         <h3>${info.title}</h3>
-                        <p>${info.content
+                        <p>${info.content}</p>
+                    </div>
+                `;
+            }
+            
+            closeAllDropdowns();
+        }
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.matches('.nav-button')) {
+                closeAllDropdowns();
+            }
+        });
+    </script>
+</body>
+</html>
