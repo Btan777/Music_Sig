@@ -323,6 +323,29 @@
             margin-bottom: 1rem;
         }
 
+        .documentary-image {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            margin: 2rem auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .documentary-image:hover {
+            transform: scale(1.02);
+        }
+
+        .image-caption {
+            text-align: center;
+            margin-top: 1rem;
+            font-style: italic;
+            color: #7f8c8d;
+            font-size: 1rem;
+        }
+
         footer {
             background: #2c3e50;
             color: white;
@@ -347,6 +370,10 @@
             
             .genre-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .documentary-image {
+                max-width: 100%;
             }
         }
     </style>
@@ -452,11 +479,23 @@
             <div class="content-section" id="centenarian">
                 <div class="music-creation-section">
                     <h2>Centenarian - Musical Composition</h2>
+                    
+                    <!-- Documentary Artwork Image -->
+                    <img src="images/longevity-documentary.jpg" 
+                         alt="Intergenerational Memory artwork featuring elderly faces surrounding a central figure with DNA strands, lions, trains, and urban skyline elements representing Singapore's transformation through generations" 
+                         class="documentary-image">
+                    <p class="image-caption">
+                        Artistic representation of longevity and intergenerational memory themes explored in the documentary and musical composition
+                    </p>
+                    
                     <div class="composition-card">
                         <h3>🎵 Centenarian Musical Project</h3>
                         <p>
                             Part of our Longevity Documentary series, this composition explores themes of wisdom, 
-                            experience, and the celebration of long life through musical storytelling.
+                            experience, and the celebration of long life through musical storytelling. The artwork above 
+                            captures the essence of Singapore's transformation through the eyes of those who lived it all - 
+                            from kampongs to modern skylines, from rickshaws to MRT trains, all woven together through 
+                            generations like DNA strands connecting past to future.
                         </p>
                         
                         <div class="poem-section">
@@ -530,15 +569,27 @@
             <!-- Longevity Project Section -->
             <div class="content-section" id="longevity-project">
                 <h2>Longevity Documentary Musical Project</h2>
+                
+                <!-- Documentary Artwork Image for this section too -->
+                <img src="images/longevity-documentary.jpg" 
+                     alt="Longevity documentary artwork showing intergenerational connections" 
+                     class="documentary-image">
+                <p class="image-caption">
+                    Visual themes that inspire the documentary's musical soundtrack
+                </p>
+                
                 <div class="composition-card">
                     <h3>🎬 Documentary Soundtrack</h3>
                     <p>
                         Creating original music for a documentary exploring themes of longevity, wisdom, and the 
-                        human experience across generations.
+                        human experience across generations. The project captures Singapore's remarkable transformation 
+                        through the lens of those who witnessed it firsthand - from colonial times through independence 
+                        to the modern metropolis we know today.
                     </p>
                     <p>
                         This project includes multiple musical pieces, each designed to complement different 
-                        aspects of the documentary narrative.
+                        aspects of the documentary narrative - the struggles and triumphs, the quiet dignity of age, 
+                        and the profound connections that bind generations together like an eternal DNA strand.
                     </p>
                 </div>
             </div>
@@ -696,11 +747,4 @@
         }
 
         // Close dropdowns when clicking outside
-        document.addEventListener('click', function(event) {
-            if (!event.target.matches('.nav-button')) {
-                closeAllDropdowns();
-            }
-        });
-    </script>
-</body>
-</html>
+        document.addEventListener('click', function(event)
