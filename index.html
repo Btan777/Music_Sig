@@ -323,29 +323,6 @@
             margin-bottom: 1rem;
         }
 
-        .documentary-image {
-            width: 100%;
-            max-width: 600px;
-            height: auto;
-            border-radius: 15px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-            margin: 2rem auto;
-            display: block;
-            transition: transform 0.3s ease;
-        }
-
-        .documentary-image:hover {
-            transform: scale(1.02);
-        }
-
-        .image-caption {
-            text-align: center;
-            margin-top: 1rem;
-            font-style: italic;
-            color: #7f8c8d;
-            font-size: 1rem;
-        }
-
         footer {
             background: #2c3e50;
             color: white;
@@ -371,10 +348,6 @@
             .genre-grid {
                 grid-template-columns: 1fr;
             }
-
-            .documentary-image {
-                max-width: 100%;
-            }
         }
     </style>
 </head>
@@ -391,7 +364,7 @@
         <nav>
             <div class="nav-container">
                 <div class="nav-item">
-                    <button class="nav-button active" onclick="showSection('home', this)">Home</button>
+                    <button class="nav-button active" onclick="showSection('home')">Home</button>
                 </div>
                 <div class="nav-item">
                     <button class="nav-button" onclick="toggleDropdown('genres-dropdown')">Genres ▼</button>
@@ -418,10 +391,10 @@
                     </div>
                 </div>
                 <div class="nav-item">
-                    <button class="nav-button" onclick="showSection('about', this)">About</button>
+                    <button class="nav-button" onclick="showSection('about')">About</button>
                 </div>
                 <div class="nav-item">
-                    <button class="nav-button" onclick="showSection('contact', this)">Contact</button>
+                    <button class="nav-button" onclick="showSection('contact')">Contact</button>
                 </div>
             </div>
         </nav>
@@ -479,23 +452,11 @@
             <div class="content-section" id="centenarian">
                 <div class="music-creation-section">
                     <h2>Centenarian - Musical Composition</h2>
-                    
-                    <!-- Documentary Artwork Image -->
-                    <img src="images/longevity-documentary.png" 
-                         alt="Intergenerational Memory artwork featuring elderly faces surrounding a central figure with DNA strands, lions, trains, and urban skyline elements representing Singapore's transformation through generations" 
-                         class="documentary-image">
-                    <p class="image-caption">
-                        Artistic representation of longevity and intergenerational memory themes explored in the documentary and musical composition
-                    </p>
-                    
                     <div class="composition-card">
                         <h3>🎵 Centenarian Musical Project</h3>
                         <p>
                             Part of our Longevity Documentary series, this composition explores themes of wisdom, 
-                            experience, and the celebration of long life through musical storytelling. The artwork above 
-                            captures the essence of Singapore's transformation through the eyes of those who lived it all - 
-                            from kampongs to modern skylines, from rickshaws to MRT trains, all woven together through 
-                            generations like DNA strands connecting past to future.
+                            experience, and the celebration of long life through musical storytelling.
                         </p>
                         
                         <div class="poem-section">
@@ -569,27 +530,15 @@
             <!-- Longevity Project Section -->
             <div class="content-section" id="longevity-project">
                 <h2>Longevity Documentary Musical Project</h2>
-                
-                <!-- Documentary Artwork Image for this section too -->
-                <img src="images/longevity-documentary.png" 
-                     alt="Longevity documentary artwork showing intergenerational connections" 
-                     class="documentary-image">
-                <p class="image-caption">
-                    Visual themes that inspire the documentary's musical soundtrack
-                </p>
-                
                 <div class="composition-card">
                     <h3>🎬 Documentary Soundtrack</h3>
                     <p>
                         Creating original music for a documentary exploring themes of longevity, wisdom, and the 
-                        human experience across generations. The project captures Singapore's remarkable transformation 
-                        through the lens of those who witnessed it firsthand - from colonial times through independence 
-                        to the modern metropolis we know today.
+                        human experience across generations.
                     </p>
                     <p>
                         This project includes multiple musical pieces, each designed to complement different 
-                        aspects of the documentary narrative - the struggles and triumphs, the quiet dignity of age, 
-                        and the profound connections that bind generations together like an eternal DNA strand.
+                        aspects of the documentary narrative.
                     </p>
                 </div>
             </div>
@@ -641,8 +590,8 @@
                     </p>
                     <p style="margin-top: 1rem;">
                         <strong>Contact our Coordinator:</strong><br>
-                        Email: [brynetan@gmail.com]<br>
-                        Phone: [+6597999778]
+                        Email: [coordinator-email]<br>
+                        Phone: [contact-number]
                     </p>
                 </div>
             </div>
@@ -654,7 +603,7 @@
     </div>
 
     <script>
-        function showSection(sectionId, buttonElement) {
+        function showSection(sectionId) {
             // Hide all sections
             const sections = document.querySelectorAll('.content-section');
             sections.forEach(section => section.classList.remove('active'));
@@ -665,11 +614,7 @@
             // Update nav button states
             const buttons = document.querySelectorAll('.nav-button');
             buttons.forEach(button => button.classList.remove('active'));
-            
-            // Make the clicked button active
-            if (buttonElement) {
-                buttonElement.classList.add('active');
-            }
+            event.target.classList.add('active');
             
             // Close all dropdowns
             closeAllDropdowns();
