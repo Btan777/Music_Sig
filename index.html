@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Singapore Music SIG</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="music" patternUnits="userSpaceOnUse" width="50" height="50"><circle cx="10" cy="10" r="2" fill="rgba(255,255,255,0.1)"/><path d="M20 15 Q25 10 30 15 Q35 20 40 15" stroke="rgba(255,255,255,0.1)" fill="none" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23music)"/></svg>') repeat;
+            opacity: 0.1;
+        }
+
+        .logo-container {
+            position: relative;
+            z-index: 2;
+            margin-bottom: 1rem;
+        }
+
+        .logo {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 3px solid #f39c12;
+            overflow: hidden;
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 80%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="%23f39c12"><g><path d="M60 40 Q65 35 70 40 L70 140 Q65 145 60 140 Z" fill="%23f39c12"/><circle cx="85" cy="50" r="8" fill="%23f39c12"/><circle cx="105" cy="60" r="8" fill="%23f39c12"/><circle cx="125" cy="45" r="8" fill="%23f39c12"/><path d="M75 50 L115 60" stroke="%23f39c12" stroke-width="2" fill="none"/><path d="M95 60 L125 45" stroke="%23f39c12" stroke-width="2" fill="none"/><path d="M30 80 Q40 75 50 80 Q60 85 70 80 Q80 75 90 80 Q100 85 110 80 Q120 75 130 80 Q140 85 150 80 Q160 75 170 80" stroke="%23f39c12" stroke-width="3" fill="none" opacity="0.7"/><path d="M30 100 Q40 95 50 100 Q60 105 70 100 Q80 95 90 100 Q100 105 110 100 Q120 95 130 100 Q140 105 150 100 Q160 95 170 100" stroke="%23f39c12" stroke-width="3" fill="none" opacity="0.7"/><circle cx="40" cy="120" r="4" fill="%23f39c12" opacity="0.8"/><circle cx="80" cy="130" r="4" fill="%23f39c12" opacity="0.8"/><circle cx="120" cy="115" r="4" fill="%23f39c12" opacity="0.8"/><circle cx="160" cy="125" r="4" fill="%23f39c12" opacity="0.8"/></g></svg>') no-repeat center;
+            background-size: contain;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+            font-style: italic;
+        }
+
+        nav {
+            background: rgba(44, 62, 80, 0.95);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding: 0 2rem;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-button {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+            background: linear-gradient(135deg, #2980b9, #1f639a);
+        }
+
+        .nav-button.active {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.3);
+        }
+
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: none;
+            min-width: 200px;
+            z-index: 1001;
+            margin-top: 0.5rem;
+        }
+
+        .dropdown.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        .dropdown-item {
+            padding: 0.8rem 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid #eee;
+            color: #333;
+            font-size: 0.9rem;
+        }
+
+        .dropdown-item:hover {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+        }
+
+        .dropdown-item:first-child {
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            border-bottom: none;
+        }
+
+        .content {
+            padding: 3rem 2rem;
+        }
+
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .welcome-section {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .welcome-section h2 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .welcome-section p {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .genre-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .genre-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-left: 4px solid #3498db;
+        }
+
+        .genre-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .genre-card h3 {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .genre-card p {
+            color: #7f8c8d;
+            line-height: 1.6;
+        }
+
+        .music-creation-section {
+            margin-top: 3rem;
+        }
+
+        .composition-card {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #f39c12;
+        }
+
+        .composition-card h3 {
+            color: #e67e22;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .poem-section {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 1rem 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .poem-text {
+            font-style: italic;
+            color: #5d6d7e;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            border-left: 3px solid #f39c12;
+            padding-left: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .coordinator-info {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .coordinator-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 2rem 1rem;
+            }
+            
+            .genre-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <div class="logo"></div>
+            </div>
+            <h1>Singapore Music SIG</h1>
+            <p class="tagline">Where Harmony Meets Innovation</p>
+        </header>
+
+        <nav>
+            <div class="nav-container">
+                <div class="nav-item">
+                    <button class="nav-button active" onclick="showSection('home')">Home</button>
+                </div>
+                <div class="nav-item">
+                    <button class="nav-button" onclick="toggleDropdown('genres-dropdown')">Genres ▼</button>
+                    <div class="dropdown" id="genres-dropdown">
+                        <div class="dropdown-item" onclick="showGenre('jazz')">Jazz</div>
+                        <div class="dropdown-item" onclick="showGenre('pop')">Pop</div>
+                        <div class="dropdown-item" onclick="showGenre('classical')">Classical</div>
+                        <div class="dropdown-item" onclick="showGenre('rock')">Rock</div>
+                        <div class="dropdown-item" onclick="showGenre('electronic')">Electronic</div>
+                        <div class="dropdown-item" onclick="showGenre('folk')">Folk</div>
+                        <div class="dropdown-item" onclick="showGenre('hip-hop')">Hip-Hop</div>
+                        <div class="dropdown-item" onclick="showGenre('country')">Country</div>
+                        <div class="dropdown-item" onclick="showGenre('blues')">Blues</div>
+                        <div class="dropdown-item" onclick="showGenre('reggae')">Reggae</div>
+                        <div class="dropdown-item" onclick="showGenre('world')">World Music</div>
+                    </div>
+                </div>
+                <div class="nav-item">
+                    <button class="nav-button" onclick="toggleDropdown('creations-dropdown')">Musical Creations ▼</button>
+                    <div class="dropdown" id="creations-dropdown">
+                        <div class="dropdown-item" onclick="showSection('centenarian')">Centenarian</div>
+                        <div class="dropdown-item" onclick="showSection('longevity-project')">Longevity Documentary</div>
+                        <div class="dropdown-item" onclick="showSection('original-compositions')">Original Compositions</div>
+                    </div>
+                </div>
+                <div class="nav-item">
+                    <button class="nav-button" onclick="showSection('about')">About</button>
+                </div>
+                <div class="nav-item">
+                    <button class="nav-button" onclick="showSection('contact')">Contact</button>
+                </div>
+            </div>
+        </nav>
+
+        <div class="content">
+            <!-- Home Section -->
+            <div class="content-section active" id="home">
+                <div class="welcome-section">
+                    <h2>Welcome to Singapore Music SIG</h2>
+                    <p>
+                        Discover the vibrant world of music in Singapore! Our Special Interest Group brings together 
+                        musicians, composers, and music enthusiasts from all genres and backgrounds. Whether you're 
+                        passionate about jazz improvisation, classical composition, or contemporary pop, you'll find 
+                        a community of like-minded individuals ready to share, learn, and create together.
+                    </p>
+                </div>
+
+                <div class="coordinator-info">
+                    <h3>Led by Our Coordinator</h3>
+                    <p>
+                        Our SIG is guided by a dedicated coordinator who brings passion and expertise to foster 
+                        musical collaboration and innovation within our community.
+                    </p>
+                </div>
+
+                <div class="genre-grid">
+                    <div class="genre-card">
+                        <h3>🎺 Jazz</h3>
+                        <p>Explore improvisation, swing rhythms, and the rich history of jazz music.</p>
+                    </div>
+                    <div class="genre-card">
+                        <h3>🎤 Pop</h3>
+                        <p>Contemporary sounds and chart-topping melodies that define popular music.</p>
+                    </div>
+                    <div class="genre-card">
+                        <h3>🎼 Classical</h3>
+                        <p>Timeless compositions and orchestral arrangements from masters old and new.</p>
+                    </div>
+                    <div class="genre-card">
+                        <h3>🎸 Rock</h3>
+                        <p>Powerful rhythms and electric energy that move audiences worldwide.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Genres Section -->
+            <div class="content-section" id="genres">
+                <h2>Musical Genres</h2>
+                <div id="genre-content">
+                    <p>Select a genre from the dropdown menu to explore different musical styles and their unique characteristics.</p>
+                </div>
+            </div>
+
+            <!-- Centenarian Section -->
+            <div class="content-section" id="centenarian">
+                <div class="music-creation-section">
+                    <h2>Centenarian - Musical Composition</h2>
+                    <div class="composition-card">
+                        <h3>🎵 Centenarian Musical Project</h3>
+                        <p>
+                            Part of our Longevity Documentary series, this composition explores themes of wisdom, 
+                            experience, and the celebration of long life through musical storytelling.
+                        </p>
+                        
+                        <div class="poem-section">
+                            <h4>Inspiration</h4>
+                            <p>
+                                This musical piece draws inspiration from stories of centenarians and their remarkable 
+                                journeys through life. The composition aims to capture:
+                            </p>
+                            <ul style="margin: 1rem 0; padding-left: 2rem; color: #5d6d7e;">
+                                <li>The gentle wisdom accumulated over a century</li>
+                                <li>Moments of joy and reflection</li>
+                                <li>The rhythms of a life well-lived</li>
+                                <li>Hope and legacy for future generations</li>
+                            </ul>
+                            
+                            <div class="poem-text">
+                                <strong>Note:</strong> The original poem that inspired this composition will be added here. 
+                                Please share the centenarian poem to complete this section.
+                            </div>
+                        </div>
+                        
+                        <p>
+                            <strong>Musical Elements:</strong> The composition incorporates gentle harmonies, 
+                            contemplative melodies, and rich orchestrations that reflect the depth and beauty 
+                            of a century of living.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Longevity Project Section -->
+            <div class="content-section" id="longevity-project">
+                <h2>Longevity Documentary Musical Project</h2>
+                <div class="composition-card">
+                    <h3>🎬 Documentary Soundtrack</h3>
+                    <p>
+                        Creating original music for a documentary exploring themes of longevity, wisdom, and the 
+                        human experience across generations.
+                    </p>
+                    <p>
+                        This project includes multiple musical pieces, each designed to complement different 
+                        aspects of the documentary narrative.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Original Compositions Section -->
+            <div class="content-section" id="original-compositions">
+                <h2>Original Compositions</h2>
+                <div class="composition-card">
+                    <h3>🎼 Our Musical Creations</h3>
+                    <p>
+                        Explore original compositions created by our SIG members, featuring diverse styles 
+                        and innovative approaches to musical expression.
+                    </p>
+                </div>
+            </div>
+
+            <!-- About Section -->
+            <div class="content-section" id="about">
+                <h2>About Singapore Music SIG</h2>
+                <div class="composition-card">
+                    <h3>Our Mission</h3>
+                    <p>
+                        To foster musical creativity, collaboration, and appreciation within the Singapore 
+                        community. We bring together musicians of all skill levels and musical interests 
+                        to share knowledge, create together, and celebrate the universal language of music.
+                    </p>
+                </div>
+                
+                <div class="composition-card">
+                    <h3>What We Do</h3>
+                    <ul style="color: #5d6d7e; line-height: 1.8;">
+                        <li>Regular jam sessions and musical gatherings</li>
+                        <li>Workshops on various musical genres and techniques</li>
+                        <li>Collaborative composition projects</li>
+                        <li>Performance opportunities</li>
+                        <li>Music appreciation and listening sessions</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Contact Section -->
+            <div class="content-section" id="contact">
+                <h2>Get In Touch</h2>
+                <div class="composition-card">
+                    <h3>Join Our Musical Community</h3>
+                    <p>
+                        Whether you're a seasoned musician or just starting your musical journey, 
+                        we welcome you to join our vibrant community of music lovers.
+                    </p>
+                    <p style="margin-top: 1rem;">
+                        <strong>Contact our Coordinator:</strong><br>
+                        Email: [coordinator-email]<br>
+                        Phone: [contact-number]
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 Singapore Music SIG. All rights reserved. | Bringing harmony to our community</p>
+        </footer>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Update nav button states
+            const buttons = document.querySelectorAll('.nav-button');
+            buttons.forEach(button => button.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Close all dropdowns
+            closeAllDropdowns();
+        }
+
+        function toggleDropdown(dropdownId) {
+            closeAllDropdowns();
+            const dropdown = document.getElementById(dropdownId);
+            dropdown.classList.toggle('show');
+        }
+
+        function closeAllDropdowns() {
+            const dropdowns = document.querySelectorAll('.dropdown');
+            dropdowns.forEach(dropdown => dropdown.classList.remove('show'));
+        }
+
+        function showGenre(genre) {
+            showSection('genres');
+            const genreContent = document.getElementById('genre-content');
+            
+            const genreInfo = {
+                jazz: {
+                    title: '🎺 Jazz',
+                    content: 'Jazz is a music genre that originated in the African-American communities of New Orleans in the late 19th and early 20th centuries. It incorporates improvisation, swing rhythms, and complex harmonies.'
+                },
+                pop: {
+                    title: '🎤 Pop Music',
+                    content: 'Pop music is a genre of popular music that originated in the 1950s. It is characterized by catchy melodies, mainstream appeal, and contemporary production techniques.'
+                },
+                classical: {
+                    title: '🎼 Classical Music',
+                    content: 'Classical music is art music produced in the traditions of Western culture. It spans from medieval times to the present day and includes symphonies, concertos, and chamber music.'
+                },
+                rock: {
+                    title: '🎸 Rock Music',
+                    content: 'Rock music is a broad genre that originated in the 1950s. It typically features electric guitars, bass, drums, and powerful vocals with strong rhythmic elements.'
+                },
+                electronic: {
+                    title: '🎹 Electronic Music',
+                    content: 'Electronic music uses electronic musical instruments, digital technology, and computer-based music technology to create unique sounds and compositions.'
+                },
+                folk: {
+                    title: '🪕 Folk Music',
+                    content: 'Folk music is traditional music that has been passed down through generations, often reflecting the cultural identity and heritage of communities.'
+                },
+                'hip-hop': {
+                    title: '🎤 Hip-Hop',
+                    content: 'Hip-hop is a cultural movement that includes rap music, DJing, breakdancing, and graffiti art. It originated in the Bronx in the 1970s.'
+                },
+                country: {
+                    title: '🤠 Country Music',
+                    content: 'Country music originated in the southern United States and features simple forms, folk lyrics, and harmonies accompanied by string instruments.'
+                },
+                blues: {
+                    title: '🎸 Blues',
+                    content: 'Blues is a music genre that originated in the Deep South around the 1870s. It is characterized by blue notes, call-and-response vocals, and twelve-bar blues structure.'
+                },
+                reggae: {
+                    title: '🌴 Reggae',
+                    content: 'Reggae originated in Jamaica in the late 1960s. It is characterized by a distinctive rhythm, social consciousness, and Rastafarian influences.'
+                },
+                world: {
+                    title: '🌍 World Music',
+                    content: 'World music encompasses traditional and contemporary music from around the globe, celebrating diverse cultural expressions and musical traditions.'
+                }
+            };
+
+            const info = genreInfo[genre];
+            if (info) {
+                genreContent.innerHTML = `
+                    <div class="genre-card">
+                        <h3>${info.title}</h3>
+                        <p>${info.content}</p>
+                    </div>
+                `;
+            }
+            
+            closeAllDropdowns();
+        }
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.matches('.nav-button')) {
+                closeAllDropdowns();
+            }
+        });
+    </script>
+</body>
+</html>
