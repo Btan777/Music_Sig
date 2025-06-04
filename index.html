@@ -481,7 +481,7 @@
                     <h2>Centenarian - Musical Composition</h2>
                     
                     <!-- Documentary Artwork Image -->
-                    <img src="images/longevity-documentary.png" 
+                    <img src="images/longevity-documentary.jpg" 
                          alt="Intergenerational Memory artwork featuring elderly faces surrounding a central figure with DNA strands, lions, trains, and urban skyline elements representing Singapore's transformation through generations" 
                          class="documentary-image">
                     <p class="image-caption">
@@ -571,7 +571,7 @@
                 <h2>Longevity Documentary Musical Project</h2>
                 
                 <!-- Documentary Artwork Image for this section too -->
-                <img src="images/longevity-documentary.jpg" 
+                <img src="images/longevity-documentary.png" 
                      alt="Longevity documentary artwork showing intergenerational connections" 
                      class="documentary-image">
                 <p class="image-caption">
@@ -747,4 +747,11 @@
         }
 
         // Close dropdowns when clicking outside
-        document.addEventListener('click', function(event)
+        document.addEventListener('click', function(event) {
+            if (!event.target.matches('.nav-button')) {
+                closeAllDropdowns();
+            }
+        });
+    </script>
+</body>
+</html>
